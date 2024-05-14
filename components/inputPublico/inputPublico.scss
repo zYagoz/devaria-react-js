@@ -1,0 +1,15 @@
+.inputPublicoContainer{
+  .inputPublico{
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $corPrimaria;
+    outline: none;
+
+    input{
+      border: none;
+      color: $corPrimaria;
+      flex:1;
+      margin-left: 12px;
+    }
+  }
+}
