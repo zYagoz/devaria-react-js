@@ -47,7 +47,7 @@ export default function UploadImagem({
         <div className="imagemPreviewContainer">
           className ={imagemPreviewClassName}
           <img src={imagemPreview} alt ='imagem preview'/>
-        <div/>)
+        </div>)}
     <input
       type='file' 
       className='oculto' 
@@ -56,4 +56,4 @@ export default function UploadImagem({
       onChange={aoAlterarImagem}
     </div>
   )
-}
+};

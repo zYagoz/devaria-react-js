@@ -1,11 +1,13 @@
+/* eslint-disable react/no-unknown-property */
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Botao from "../../components/botao";
-import inputPublico from "../../components/inputPublico";
+import InputPublico from "../../components/inputPublico";
 import UploadImagem from "../../components/uploadImagem";
 import { validarEmail, validarSenha, validarNome, validarConfimacaoSenha} from '../../utils/validadores';
 import UsariosService from "../../services/UsuarioService";
+import { useRouter } from "next/router";
 
 
 import imagemLogo from "../../public/imagens/logo.svg";
@@ -18,13 +20,13 @@ import imagemChave from "../../public/imagens/chave.svg";
 const usuarioService = new UsuarioService();
 
 export default function Cadastro(){
-  const [imagem, setImagem] = useStateeState(null");
+  const [imagem, setImagem] = useStateeState(null);
   const [nome, setNome] = useStateeState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmacaoSenha, setconfirmacaoSenha] = useState("");
   const [estaSubmetendo, setEstaSubmetendo] = useState(false);
-
+  const router = useRouter();
 
 
   const validarFormulario = () => {
@@ -37,7 +39,7 @@ export default function Cadastro(){
   }
 
 
-  const aoSubmeter = async (e) = >{
+  const aoSubmeter = async (e) => {
     e.preventDefault();
     if(!validarFormulario()){
       return
@@ -56,7 +58,13 @@ export default function Cadastro(){
 
       }
       await usuarioService.cadastro(corpoReqCadastro);
-      alert("sucesso");
+      await usuarioService.login({
+        login: email,
+        senha
+      })
+
+
+      router.push('/')
     } catch (error) {
       alert("Erro ao cadastrar usuário. " + error?.response?.data?.erro)
       
@@ -82,7 +90,7 @@ export default function Cadastro(){
             imagemPreview = {imagem?.preview || imagemUsuarioCinza.src}
             setImagem = {setImagem}
           />
-          <inputPublico
+          <InputPublico
             imagem = {imagemUsuarioAtivo}
             texto = "Nome completo"
             tipo = "text"
@@ -92,7 +100,7 @@ export default function Cadastro(){
             exibirMensagemValidacao = {nome && !validarNome(nome)}
           />
 
-          <inputPublico
+          <InputPublico
             imagem = {imagemEnvelope}
             texto = "E-mail"
             tipo = "email"
@@ -102,7 +110,7 @@ export default function Cadastro(){
             exibirMensagemValidacao = {email && !validarEmail(email)}
           />
 
-          <inputPublico
+          <InputPublico
             imagem= {imagemChave}
             texto = 'Senha'
             tipo = 'password'
@@ -111,7 +119,7 @@ export default function Cadastro(){
             mensagemValidacao = "A senha precisa de 3 caracteres"
             exibirMensagemValidacao = {senha && !validarSenha(senha)}
           />
-          <inputPublico
+          <InputPublico
             imagem= {imagemChave}
             texto = 'Confirme sua senha'
             tipo = 'password'

@@ -8,9 +8,12 @@ export default class UsariosService extends HttpService {
     localStorage.setItem("nome", data.nome);
     localStorage.setItem("email", data.email);
     localStorage.setItem("token", data.token);
+
+    const usuario = await this.get('/usuario');
+    localStorage.setItem('id', usuario.data._id);
     
-    if(data.avatar){
-      localStorage.setItem("avatar", data.avatar);
+    if(usuario.data.avatar){
+      localStorage.setItem("avatar", usuario.data.avatar);
 
     }
     
@@ -20,4 +23,23 @@ export default class UsariosService extends HttpService {
     return this.post('/cadastro', dados)
 
   }
+
+  estaAutenticado() {
+    return localStorage.getItem('token') !== null;
+  }
+
+  async pesquisar(termodaPesquisa) {
+    return this.get('/pesquisa?.filter=' + termodaPesquisa);
+
+  }
+
+  obterInformacoesDoUsarioLogado(){
+    return{
+      id: localStorage.getItem('id'),
+      nome: localStorage.getItem('nome'),
+      email: localStorage.getItem('email'),
+      avatar: localStorage.getItem('avatar'),
+    }
+  }
+
 }

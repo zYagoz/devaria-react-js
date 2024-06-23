@@ -4,7 +4,7 @@ import Botao from "../botao";
 import Link from "next/link";
 import { useState } from "react";
 import { validarEmail, validarSenha} from '../../utils/validadores'
-import UsariosService from "../../services/UsuarioService";
+import UsuarioService from "../../services/UsuarioService";
 
 import imagemEnvelope from "../../public/imagens/envelope.svg";
 import imagemChave from "../../public/imagens/chave.svg";
@@ -12,7 +12,7 @@ import imagemLogo from "../../public/imagens/logo.svg";
 
 const usuarioService = new UsuarioService();
 
-export  default function Login() {
+export  default function Login({aposAutenticacao}) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [estaSubmetendo, setEstaSubmetendo] = useState(false);
@@ -35,8 +35,12 @@ export  default function Login() {
       await usuarioService.login({
         login: email,
         senha: senha
-      })
-      
+      });
+
+      if(aposAutenticacao){
+        aposAutenticacao();
+      }
+      // Redirecionar para home
     } catch (error) {
       alert("Erro ao logar   usuário. " + error?.response?.data?.erro)
       
