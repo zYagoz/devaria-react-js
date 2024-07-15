@@ -1,6 +1,6 @@
-import HttpService from "./HttpsService";
+import DevagramApiService from "./DevagramApiService";
 
-export default class FeedService extends HttpService{
+export default class FeedService extends DevagramApiService{
   async carregarPostagens(idUsuario){
     let url = '/feed';
     if(idUsuario){
@@ -17,6 +17,10 @@ export default class FeedService extends HttpService{
 
   async alterarCurtida(idPostagem) {
     return this.put('/like?id=${idPostagem}')
+  }
+
+  async fazerPublicacao(dadosPublicacao){
+    return this.post('/publicacao', dadosPublicacao);
   }
 }
 

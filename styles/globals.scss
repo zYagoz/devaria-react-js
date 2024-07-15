@@ -22,7 +22,7 @@ h1{
 }
 
 .oculto{
-  display: none;
+  display: none !important;
 }
 
 input{
@@ -102,6 +102,19 @@ body {
   }
 }
 
+.linhaDivisoria{
+  margin: 0;
+  border: none;
+  background-color: $cinza1;
+  height: 1px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    margin: 0 auto;
+    width: 94%;
+    
+  }
+}
+
 @import '../public/fonts/fonts.scss';
 @import '../components/botao/botao.scss';
 @import './paginaPublica.scss';
@@ -110,3 +123,7 @@ body {
 @import '../components/layout/cabecalho.scss';
 @import '../components/feed/feed.scss';
 @import '../components/cabecalhoComAcoes/cabecalhoComAcoes.scss';
+@import '../components/loading/loading.scss';
+@import '../pages/perfil/perfil.scss';
+@import '../pages/publicacao/publicacao.scss;
+

@@ -15,7 +15,7 @@ const feedService = new FeedService()
 
 export default function Postagem({
   id,
-  usario,
+  usuario,
   fotoDoPost,
   descricao,
   comentarios,
@@ -102,8 +102,8 @@ export default function Postagem({
     <div className="postagem">
       <Link href={'/perfil/${usuario.id'}>
         <section className="cabecalhoPostagem"> 
-          <Avatar src={usario.avatar}/>
-          <strog>{usario.nome}</strog>
+          <Avatar src={usuario.avatar}/>
+          <strog>{usuario.nome}</strog>
         </section>
       </Link>
 

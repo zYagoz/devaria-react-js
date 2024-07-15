@@ -1,7 +1,7 @@
 import imagemAvatar from "../public/imagens/avatar.svg";
-import HttpService from "./HttpsService";
+import DevagramApiService from "./DevagramApiService";
 
-export default class UsariosService extends HttpService {
+export default class UsariosService extends DevagramApiService {
   async login (credenciais){
     const {data} = await this.post('/login', credenciais);
 
@@ -14,13 +14,23 @@ export default class UsariosService extends HttpService {
     
     if(usuario.data.avatar){
       localStorage.setItem("avatar", usuario.data.avatar);
-
     }
-    
+  }
+
+  async logout () {
+    localStorage.removeItem("nome");
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("avatar");
   }
 
   async cadastro (dados) {
     return this.post('/cadastro', dados)
+  }
+
+  async atualizarPerfil(dados){
+    return this.put('/usuario', dados)
 
   }
 
@@ -31,6 +41,14 @@ export default class UsariosService extends HttpService {
   async pesquisar(termodaPesquisa) {
     return this.get('/pesquisa?.filter=' + termodaPesquisa);
 
+  }
+
+  async obterPerfil(idUsuario){
+    return this.get(`/pesquisa?id=${idUsuario}`);
+  };
+
+  async alternarSeguir(idUsuario){
+    return this.put(`/seguir?id=${idUsuario}`)
   }
 
   obterInformacoesDoUsarioLogado(){

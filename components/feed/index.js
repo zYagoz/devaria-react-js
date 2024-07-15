@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import Postagem from "./Postagem";
-import FeedService from "../../services/FeedSerive.JS";
+import FeedService from "../../services/FeedSerive.js";
 
 const feedService = new FeedService();
 
-export default function Feed({usarioLogado}){
+export default function Feed({usuarioLogado, idUsuario}){
   const [listaDePostagens, setListaDePostagens] = useState([]);
 
   useEffect(async () => {
-    const {data} = await feedService.carregarPostagens();
+    setListaDePostagens([]);
+    const {data} = await feedService.carregarPostagens(usuarioPerfil?._id);
 
-    const postagensFormatadas = data.map(() => {
+    const postagensFormatadas = data.map((postagem) => {
       {
         id: postagem._id,
         usuario: {
           id: postagem.userId,
-          nome: postagem.usuario.nome,
-          avatar postagem.usario.avatar
+          nome: postagem.usuario.nome || usuarioPerfil?.nome,
+          avatar postagem.usario.avatar || usuarioPerfil?.avatar
         },
         fotoDoPost: postagem.foto,
         descricao: postagem.descricao,
@@ -29,7 +30,11 @@ export default function Feed({usarioLogado}){
     });
 
     setListaDePostagens(postagensFormatadas);
-  }, [usarioLogado]);
+  }, [usarioLogado, idUsuario]);
+
+  if(!listaDePostagens.length){
+    return null;
+  }
 
 
   return (

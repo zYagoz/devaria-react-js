@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import UsuarioSerivce from '../services/UsuarioService'
 import Cabecalho from "../components/layout/Cabecalho";
 import Rodape from "../components/layout/Rodape";
+import Loading from "../components/loading";
 
 const usuarioService = new UsuarioSerivce()
 
@@ -22,6 +23,7 @@ export default function comAutorizacao(Componente) {
       return (
         <>
           <Cabecalho usarioLogado={usarioLogado}/>
+          <Loading/>
           <Componente usarioLogado={usarioLogado} {...props} />
           <Rodape usarioLogado={usarioLogado}/>
         </>
