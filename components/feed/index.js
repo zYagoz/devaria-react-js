@@ -17,7 +17,7 @@ export default function Feed({usuarioLogado, idUsuario}){
         usuario: {
           id: postagem.userId,
           nome: postagem.usuario.nome || usuarioPerfil?.nome,
-          avatar postagem.usario.avatar || usuarioPerfil?.avatar
+          avatar: postagem.usario.avatar || usuarioPerfil?.avatar,
         },
         fotoDoPost: postagem.foto,
         descricao: postagem.descricao,

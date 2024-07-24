@@ -88,11 +88,10 @@
 }
 
 @media screen and (min-width: $desktopBreakpoint) {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
   .conteudoPaginaPublicacao{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     .primeiraEtapa{
       cursor: pointer;
 
