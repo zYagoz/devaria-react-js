@@ -11,8 +11,7 @@ export default function Feed({usuarioLogado, idUsuario}){
     setListaDePostagens([]);
     const {data} = await feedService.carregarPostagens(usuarioPerfil?._id);
 
-    const postagensFormatadas = data.map((postagem) => {
-      {
+    const postagensFormatadas = data.map((postagem) => ({
         id: postagem._id,
         usuario: {
           id: postagem.userId,
@@ -25,9 +24,8 @@ export default function Feed({usuarioLogado, idUsuario}){
         comentarios: postagem.comentarios.map(c => ({
           nome: c.nome,
           mensagem: c.comentario
-        }))
-      }
-    });
+        }))   
+    }));
 
     setListaDePostagens(postagensFormatadas);
   }, [usarioLogado, idUsuario]);
